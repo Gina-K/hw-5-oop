@@ -1,20 +1,26 @@
 'use strict'
 
-var BURGER_SMALL_PRICE = 50;
-var BURGER_SMALL_CALORIE = 20;
-var BURGER_BIG_PRICE = 100;
-var BURGER_BIG_CALORIE = 40;
-var CHEESE_PRICE = 10;
-var CHEESE_CALORIE = 20;
-var LETTUCE_PRICE = 20;
-var LETTUCE_CALORIE = 5;
-var POTATO_PRICE = 15;
-var POTATO_CALORIE = 10;
-var CAESAR_PRICE = 100;
-var CAESAR_CALORIE = 20;
-var OLIVIER_PRICE = 50;
-var OLIVIER_CALORIE = 80;
-var COLA_PRICE = 50;
-var COLA_CALORIE = 40;
-var COFFEE_PRICE = 80;
-var COFFEE_CALORIE = 20;
+var MENU = {
+    PRICE: {
+        burgerBig: 100,
+        burgerSmall: 50,
+        stuffingCheese: 10,
+        stuffingLettuce: 20,
+        stuffingPotato: 15,
+        caesar: 100,
+        olivier: 50,
+        cola: 50,
+        coffee: 80
+    },
+    CALORIE: {
+        burgerBig: 40,
+        burgerSmall: 20,
+        stuffingCheese: 20,
+        stuffingLettuce: 5,
+        stuffingPotato: 10,
+        caesar: 20,
+        olivier: 80,
+        cola: 40,
+        coffee: 20
+    }
+};
