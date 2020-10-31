@@ -25,35 +25,37 @@ var MENU = {
     }
 };
 
-var hamburger = {
-    calculatePrice: function () {
-        var cost = 0;
-        for (var key in this.custom) {
-            if (this.custom[key]) {
-                cost += MENU.PRICE[key];
-            }
-        }
-        this.price = cost;
-    },
-    calculateCalorie: function () {
-        var calorieContent = 0;
-        for (var key in this.custom) {
-            if (this.custom[key]) {
-                calorieContent += MENU.CALORIE[key];
-            }
-        }
-        this.calorie = calorieContent;
-    },
-    price: null,
-    calorie: null,
-    custom: {
-        burgerBig: false,
-        burgerSmall: true,
-        stuffingCheese: true,
-        stuffingLettuce: true,
-        stuffingPotato: false
+function Hamburger(burgerBig, burgerSmall, stuffingCheese, stuffingLettuce, stuffingPotato) {
+    this.custom = {
+        burgerBig: burgerBig,
+        burgerSmall: burgerSmall,
+        stuffingCheese: stuffingCheese,
+        stuffingLettuce: stuffingLettuce,
+        stuffingPotato: stuffingPotato
     }
 }
+
+Hamburger.prototype.calculatePrice = function () {
+    var cost = 0;
+    for (var key in this.custom) {
+        if (this.custom[key]) {
+            cost += MENU.PRICE[key];
+        }
+    }
+    this.price = cost;
+};
+
+Hamburger.prototype.calculateCalorie = function () {
+    var calorieContent = 0;
+    for (var key in this.custom) {
+        if (this.custom[key]) {
+            calorieContent += MENU.CALORIE[key];
+        }
+    }
+    this.calorie = calorieContent;
+};
+
+var hamburger = new Hamburger(true, false, false, false, true);
 
 hamburger.calculatePrice();
 hamburger.calculateCalorie();
