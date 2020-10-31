@@ -25,17 +25,11 @@ var MENU = {
     }
 };
 
-function Hamburger(burgerBig, burgerSmall, stuffingCheese, stuffingLettuce, stuffingPotato) {
-    this.custom = {
-        burgerBig: burgerBig,
-        burgerSmall: burgerSmall,
-        stuffingCheese: stuffingCheese,
-        stuffingLettuce: stuffingLettuce,
-        stuffingPotato: stuffingPotato
-    }
+function Dish() {
+    this.custom = {};
 }
 
-Hamburger.prototype.calculatePrice = function () {
+Dish.prototype.calculatePrice = function () {
     var cost = 0;
     for (var key in this.custom) {
         if (this.custom[key]) {
@@ -45,7 +39,7 @@ Hamburger.prototype.calculatePrice = function () {
     this.price = cost;
 };
 
-Hamburger.prototype.calculateCalorie = function () {
+Dish.prototype.calculateCalorie = function () {
     var calorieContent = 0;
     for (var key in this.custom) {
         if (this.custom[key]) {
@@ -54,6 +48,19 @@ Hamburger.prototype.calculateCalorie = function () {
     }
     this.calorie = calorieContent;
 };
+
+Hamburger.prototype = new Dish;
+
+function Hamburger(burgerBig, burgerSmall, stuffingCheese, stuffingLettuce, stuffingPotato) {
+    Dish.call(this);
+    this.custom = {
+        burgerBig: burgerBig,
+        burgerSmall: burgerSmall,
+        stuffingCheese: stuffingCheese,
+        stuffingLettuce: stuffingLettuce,
+        stuffingPotato: stuffingPotato
+    }
+}
 
 var hamburger = new Hamburger(true, false, false, false, true);
 
