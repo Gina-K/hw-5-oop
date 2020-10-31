@@ -24,3 +24,30 @@ var MENU = {
         coffee: 20
     }
 };
+
+var hamburger = {
+    calculatePrice: function () {
+        var cost = 0;
+        for (var key in this.custom) {
+            if (this.custom[key]) {
+                cost += MENU.PRICE[key];
+            }
+        }
+        this.price = cost;
+    },
+    calculateCalorie: function () {
+        //    some code here
+    },
+    price: null,
+    calorie: null,
+    custom: {
+        burgerBig: false,
+        burgerSmall: true,
+        stuffingCheese: true,
+        stuffingLettuce: true,
+        stuffingPotato: false
+    }
+}
+
+hamburger.calculatePrice();
+console.log(hamburger.price);
