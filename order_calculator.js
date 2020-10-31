@@ -36,7 +36,13 @@ var hamburger = {
         this.price = cost;
     },
     calculateCalorie: function () {
-        //    some code here
+        var calorieContent = 0;
+        for (var key in this.custom) {
+            if (this.custom[key]) {
+                calorieContent += MENU.CALORIE[key];
+            }
+        }
+        this.calorie = calorieContent;
     },
     price: null,
     calorie: null,
@@ -50,4 +56,6 @@ var hamburger = {
 }
 
 hamburger.calculatePrice();
+hamburger.calculateCalorie();
 console.log(hamburger.price);
+console.log(hamburger.calorie);
