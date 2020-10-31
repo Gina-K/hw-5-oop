@@ -25,8 +25,10 @@ var MENU = {
     }
 };
 
-function Dish() {
-    this.custom = {};
+function Dish(name1, name2, option1, option2) {
+  this.custom = {};
+  this.custom[name1] = option1;
+  this.custom[name2] = option2;
 }
 
 Dish.prototype.calculatePrice = function () {
@@ -49,8 +51,6 @@ Dish.prototype.calculateCalorie = function () {
     this.calorie = calorieContent;
 };
 
-Hamburger.prototype = new Dish;
-
 function Hamburger(burgerBig, burgerSmall, stuffingCheese, stuffingLettuce, stuffingPotato) {
     Dish.call(this);
     this.custom = {
@@ -62,9 +62,41 @@ function Hamburger(burgerBig, burgerSmall, stuffingCheese, stuffingLettuce, stuf
     }
 }
 
-var hamburger = new Hamburger(true, false, false, false, true);
+Hamburger.prototype = new Dish();
+
+function Beverage (cola, coffee) {
+    Dish.call(this, "cola", "coffee", cola, coffee);
+}
+
+Beverage.prototype = new Dish();
+
+function Salad (caesar, olivier, weight) {
+  Dish.call(this, "caesar", "olivier", caesar, olivier);
+  this.weight = weight;
+}
+
+Salad.prototype = new Dish();
+
+var hamburger = new Hamburger(false, true, false, false, true);
+var beverage = new Beverage(false, true);
+var salad = new Salad(true, false, 50);
 
 hamburger.calculatePrice();
 hamburger.calculateCalorie();
-console.log(hamburger.price);
-console.log(hamburger.calorie);
+console.log("Hamburger price: " + hamburger.price + " coins");
+console.log("Hamburger calorie: " + hamburger.calorie + " cal");
+
+beverage.calculatePrice();
+beverage.calculateCalorie();
+console.log("Beverage price: " + beverage.price + " coins");
+console.log("Beverage calorie: " + beverage.calorie + " cal");
+
+salad.calculatePrice();
+salad.calculateCalorie();
+console.log("Salad price: " + salad.price + " coins");
+console.log("Salad calorie: " + salad.calorie + " cal");
+
+// TODO: Rewrite methods calculateCalorie and calculatePrice. They have to return the value instead of set the property
+//  calorie and price
+
+// TODO: Add methods to calculate price and calorie for any salad portion (at this time it works only for 100g)
