@@ -26,9 +26,9 @@ var MENU = {
 };
 
 function Dish(name1, name2, option1, option2) {
-  this.custom = {};
-  this.custom[name1] = option1;
-  this.custom[name2] = option2;
+    this.custom = {};
+    this.custom[name1] = option1;
+    this.custom[name2] = option2;
 }
 
 Dish.prototype.calculatePrice = function () {
@@ -38,17 +38,17 @@ Dish.prototype.calculatePrice = function () {
             cost += MENU.PRICE[key];
         }
     }
-    this.price = cost;
+    return cost;
 };
 
 Dish.prototype.calculateCalorie = function () {
-    var calorieContent = 0;
+    var calorie = 0;
     for (var key in this.custom) {
         if (this.custom[key]) {
-            calorieContent += MENU.CALORIE[key];
+            calorie += MENU.CALORIE[key];
         }
     }
-    this.calorie = calorieContent;
+    return calorie;
 };
 
 function Hamburger(burgerBig, burgerSmall, stuffingCheese, stuffingLettuce, stuffingPotato) {
@@ -64,15 +64,15 @@ function Hamburger(burgerBig, burgerSmall, stuffingCheese, stuffingLettuce, stuf
 
 Hamburger.prototype = new Dish();
 
-function Beverage (cola, coffee) {
+function Beverage(cola, coffee) {
     Dish.call(this, "cola", "coffee", cola, coffee);
 }
 
 Beverage.prototype = new Dish();
 
-function Salad (caesar, olivier, weight) {
-  Dish.call(this, "caesar", "olivier", caesar, olivier);
-  this.weight = weight;
+function Salad(caesar, olivier, weight) {
+    Dish.call(this, "caesar", "olivier", caesar, olivier);
+    this.weight = weight;
 }
 
 Salad.prototype = new Dish();
@@ -81,22 +81,13 @@ var hamburger = new Hamburger(false, true, false, false, true);
 var beverage = new Beverage(false, true);
 var salad = new Salad(true, false, 50);
 
-hamburger.calculatePrice();
-hamburger.calculateCalorie();
-console.log("Hamburger price: " + hamburger.price + " coins");
-console.log("Hamburger calorie: " + hamburger.calorie + " cal");
+console.log("Hamburger price: " + hamburger.calculatePrice() + " coins");
+console.log("Hamburger calorie: " + hamburger.calculateCalorie() + " cal");
 
-beverage.calculatePrice();
-beverage.calculateCalorie();
-console.log("Beverage price: " + beverage.price + " coins");
-console.log("Beverage calorie: " + beverage.calorie + " cal");
+console.log("Beverage price: " + beverage.calculatePrice() + " coins");
+console.log("Beverage calorie: " + hamburger.calculateCalorie() + " cal");
 
-salad.calculatePrice();
-salad.calculateCalorie();
-console.log("Salad price: " + salad.price + " coins");
-console.log("Salad calorie: " + salad.calorie + " cal");
-
-// TODO: Rewrite methods calculateCalorie and calculatePrice. They have to return the value instead of set the property
-//  calorie and price
+console.log("Salad price: " + salad.calculatePrice() + " coins");
+console.log("Salad calorie: " + hamburger.calculateCalorie() + " cal");
 
 // TODO: Add methods to calculate price and calorie for any salad portion (at this time it works only for 100g)
