@@ -82,6 +82,11 @@ Salad.prototype.calculatePrice = function () {
         return Math.floor(basicCalculatePrice.call(this) / 100 * this.weight);
 }
 
+Salad.prototype.calculateCalorie = function () {
+    var basicCalculateCalorie = Dish.prototype.calculateCalorie;
+    return Math.round(basicCalculateCalorie.call(this) / 100 * this.weight);
+}
+
 var hamburger = new Hamburger(false, true, false, false, true);
 var beverage = new Beverage(false, true);
 var salad = new Salad(true, false, 50);
@@ -93,6 +98,6 @@ console.log("Beverage price: " + beverage.calculatePrice() + " coins");
 console.log("Beverage calorie: " + hamburger.calculateCalorie() + " cal");
 
 console.log("Salad price: " + salad.calculatePrice() + " coins");
-console.log("Salad calorie: " + hamburger.calculateCalorie() + " cal");
+console.log("Salad calorie: " + salad.calculateCalorie() + " cal");
 
 // TODO: Add methods to calculate price and calorie for any salad portion (at this time it works only for 100g)
