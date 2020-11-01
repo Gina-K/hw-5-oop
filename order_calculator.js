@@ -87,17 +87,33 @@ Salad.prototype.calculateCalorie = function () {
     return Math.round(basicCalculateCalorie.call(this) / 100 * this.weight);
 }
 
-var hamburger = new Hamburger(false, true, false, false, true);
-var beverage = new Beverage(false, true);
-var salad = new Salad(true, false, 50);
+// var hamburger = new Hamburger(false, true, false, false, true);
+// var beverage = new Beverage(false, true);
+// var salad = new Salad(true, false, 50);
+//
+// console.log("Hamburger price: " + hamburger.calculatePrice() + " coins");
+// console.log("Hamburger calorie: " + hamburger.calculateCalorie() + " cal");
+//
+// console.log("Beverage price: " + beverage.calculatePrice() + " coins");
+// console.log("Beverage calorie: " + hamburger.calculateCalorie() + " cal");
+//
+// console.log("Salad price: " + salad.calculatePrice() + " coins");
+// console.log("Salad calorie: " + salad.calculateCalorie() + " cal");
 
-console.log("Hamburger price: " + hamburger.calculatePrice() + " coins");
-console.log("Hamburger calorie: " + hamburger.calculateCalorie() + " cal");
+function Order() {
+    this.orderContent = [];
+}
 
-console.log("Beverage price: " + beverage.calculatePrice() + " coins");
-console.log("Beverage calorie: " + hamburger.calculateCalorie() + " cal");
+Order.prototype.isPaid = false;
 
-console.log("Salad price: " + salad.calculatePrice() + " coins");
-console.log("Salad calorie: " + salad.calculateCalorie() + " cal");
+Order.prototype.addToOrder = function (item) {
+    // TODO: add isPaid check
+    this.orderContent.push(item);
+}
 
-// TODO: Add methods to calculate price and calorie for any salad portion (at this time it works only for 100g)
+var myOrder = new Order;
+
+myOrder.addToOrder(new Beverage(true, false));
+myOrder.addToOrder(new Salad (true, false, 100));
+
+console.log(myOrder);
