@@ -77,6 +77,11 @@ function Salad(caesar, olivier, weight) {
 
 Salad.prototype = new Dish();
 
+Salad.prototype.calculatePrice = function () {
+    var basicCalculatePrice = Dish.prototype.calculatePrice;
+        return Math.floor(basicCalculatePrice.call(this) / 100 * this.weight);
+}
+
 var hamburger = new Hamburger(false, true, false, false, true);
 var beverage = new Beverage(false, true);
 var salad = new Salad(true, false, 50);
