@@ -79,7 +79,7 @@ Salad.prototype = new Dish();
 
 Salad.prototype.calculatePrice = function () {
     var basicCalculatePrice = Dish.prototype.calculatePrice;
-        return Math.floor(basicCalculatePrice.call(this) / 100 * this.weight);
+    return Math.floor(basicCalculatePrice.call(this) / 100 * this.weight);
 }
 
 Salad.prototype.calculateCalorie = function () {
@@ -110,13 +110,19 @@ Order.prototype.pay = function () {
 };
 
 Order.prototype.addToOrder = function (item) {
-    // TODO: add isPaid check
-    this.orderContent.push(item);
+    if (!this.isPaid) {
+        this.orderContent.push(item);
+    } else {
+        console.log("Sorry, your order has already been paid so you can't add a new position.");
+        console.log("If you want something else, please make a new order.");
+    }
 }
 
 var myOrder = new Order;
 
 myOrder.addToOrder(new Beverage(true, false));
-myOrder.addToOrder(new Salad (true, false, 100));
+myOrder.addToOrder(new Salad(true, false, 100));
 
 console.log(myOrder);
+myOrder.pay();
+myOrder.addToOrder(new Salad(true, false, 100));
