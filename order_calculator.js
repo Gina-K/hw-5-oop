@@ -118,11 +118,20 @@ Order.prototype.addToOrder = function (item) {
     }
 }
 
+Order.prototype.removeFromOrder = function (index) {
+    if (!this.isPaid) {
+        this.orderContent.splice(index, 1);
+    } else {
+        console.log("Sorry, your order has already been paid so you can't delete or change positions.");
+    }
+}
+
 var myOrder = new Order;
 
 myOrder.addToOrder(new Beverage(true, false));
 myOrder.addToOrder(new Salad(true, false, 100));
-
+myOrder.addToOrder(new Hamburger(true, false, false, true, true));
 console.log(myOrder);
-myOrder.pay();
-myOrder.addToOrder(new Salad(true, false, 100));
+
+myOrder.removeFromOrder(0);
+console.log(myOrder);
