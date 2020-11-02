@@ -112,6 +112,7 @@ Order.prototype.pay = function () {
 Order.prototype.addToOrder = function (item) {
     if (!this.isPaid) {
         this.orderContent.push(item);
+        this.calculatePrice();
     } else {
         console.log("Sorry, your order has already been paid so you can't add a new position.");
         console.log("If you want something else, please make a new order.");
@@ -121,9 +122,19 @@ Order.prototype.addToOrder = function (item) {
 Order.prototype.removeFromOrder = function (index) {
     if (!this.isPaid) {
         this.orderContent.splice(index, 1);
+        this.calculatePrice();
     } else {
         console.log("Sorry, your order has already been paid so you can't delete or change positions.");
     }
+}
+
+Order.prototype.calculatePrice = function () {
+    var cost = null;
+    this.orderContent.forEach(function (item) {
+        cost += item.calculatePrice();
+    });
+    console.log("Your order price is " + cost + " tugr.");
+    return cost;
 }
 
 var myOrder = new Order;
@@ -135,3 +146,4 @@ console.log(myOrder);
 
 myOrder.removeFromOrder(0);
 console.log(myOrder);
+myOrder.calculatePrice();
