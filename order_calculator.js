@@ -113,6 +113,7 @@ Order.prototype.addToOrder = function (item) {
     if (!this.isPaid) {
         this.orderContent.push(item);
         this.calculatePrice();
+        this.calculateCalorie();
     } else {
         console.log("Sorry, your order has already been paid so you can't add a new position.");
         console.log("If you want something else, please make a new order.");
@@ -123,6 +124,7 @@ Order.prototype.removeFromOrder = function (index) {
     if (!this.isPaid) {
         this.orderContent.splice(index, 1);
         this.calculatePrice();
+        this.calculateCalorie();
     } else {
         console.log("Sorry, your order has already been paid so you can't delete or change positions.");
     }
@@ -137,6 +139,15 @@ Order.prototype.calculatePrice = function () {
     return cost;
 }
 
+Order.prototype.calculateCalorie = function () {
+    var calorie = null;
+    this.orderContent.forEach(function (item) {
+        calorie += item.calculateCalorie();
+    });
+    console.log("The calorie content of your order is " + calorie + " cal.");
+    return calorie;
+}
+
 var myOrder = new Order;
 
 myOrder.addToOrder(new Beverage(true, false));
@@ -147,3 +158,4 @@ console.log(myOrder);
 myOrder.removeFromOrder(0);
 console.log(myOrder);
 myOrder.calculatePrice();
+myOrder.calculateCalorie();
