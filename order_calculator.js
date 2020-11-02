@@ -64,11 +64,20 @@ function Hamburger(burgerBig, burgerSmall, stuffingCheese, stuffingLettuce, stuf
 
 Hamburger.prototype = new Dish();
 
+Hamburger.prototype.getName = function () {
+    return ((this.custom.burgerBig ? "Big" : "Small") + " hamburger" + (this.custom.stuffingCheese ? " with cheese" : "")
+        + (this.custom.stuffingLettuce ? " with lettuce" : "" + (this.custom.stuffingPotato ? " with potato" : "")));
+}
+
 function Beverage(cola, coffee) {
     Dish.call(this, "cola", "coffee", cola, coffee);
 }
 
 Beverage.prototype = new Dish();
+
+Beverage.prototype.getName = function () {
+    return (this.custom.cola ? "Cola" : "Coffee");
+}
 
 function Salad(caesar, olivier, weight) {
     Dish.call(this, "caesar", "olivier", caesar, olivier);
@@ -76,6 +85,10 @@ function Salad(caesar, olivier, weight) {
 }
 
 Salad.prototype = new Dish();
+
+Salad.prototype.getName = function () {
+    return (this.custom.caesar ? "Caesar salad" : "Olivier salad");
+}
 
 Salad.prototype.calculatePrice = function () {
     var basicCalculatePrice = Dish.prototype.calculatePrice;
@@ -87,19 +100,6 @@ Salad.prototype.calculateCalorie = function () {
     return Math.round(basicCalculateCalorie.call(this) / 100 * this.weight);
 }
 
-// var hamburger = new Hamburger(false, true, false, false, true);
-// var beverage = new Beverage(false, true);
-// var salad = new Salad(true, false, 50);
-//
-// console.log("Hamburger price: " + hamburger.calculatePrice() + " coins");
-// console.log("Hamburger calorie: " + hamburger.calculateCalorie() + " cal");
-//
-// console.log("Beverage price: " + beverage.calculatePrice() + " coins");
-// console.log("Beverage calorie: " + hamburger.calculateCalorie() + " cal");
-//
-// console.log("Salad price: " + salad.calculatePrice() + " coins");
-// console.log("Salad calorie: " + salad.calculateCalorie() + " cal");
-
 function Order() {
     this.orderContent = [];
     this.isPaid = false;
@@ -107,11 +107,14 @@ function Order() {
 
 Order.prototype.pay = function () {
     this.isPaid = true;
+    console.log("Your order was successfully paid. Thank you!");
+    console.log("------------------------------------------------------------------");
 };
 
 Order.prototype.addToOrder = function (item) {
     if (!this.isPaid) {
         this.orderContent.push(item);
+        console.log(item.getName() + " added to your order.");
         this.calculatePrice();
         this.calculateCalorie();
     } else {
@@ -122,6 +125,7 @@ Order.prototype.addToOrder = function (item) {
 
 Order.prototype.removeFromOrder = function (index) {
     if (!this.isPaid) {
+        console.log(this.orderContent[index].getName() + " removed from your order.");
         this.orderContent.splice(index, 1);
         this.calculatePrice();
         this.calculateCalorie();
@@ -145,17 +149,19 @@ Order.prototype.calculateCalorie = function () {
         calorie += item.calculateCalorie();
     });
     console.log("The calorie content of your order is " + calorie + " cal.");
+    console.log("------------------------------------------------------------------");
     return calorie;
 }
 
+// Usage example
+
 var myOrder = new Order;
 
+myOrder.addToOrder(new Hamburger(false, true, true, false, false));
 myOrder.addToOrder(new Beverage(true, false));
 myOrder.addToOrder(new Salad(true, false, 100));
 myOrder.addToOrder(new Hamburger(true, false, false, true, true));
-console.log(myOrder);
-
 myOrder.removeFromOrder(0);
-console.log(myOrder);
-myOrder.calculatePrice();
-myOrder.calculateCalorie();
+myOrder.pay();
+myOrder.addToOrder(new Hamburger(true, false, false, true, true));
+myOrder.removeFromOrder(0);
