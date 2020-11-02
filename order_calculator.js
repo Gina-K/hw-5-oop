@@ -102,9 +102,12 @@ Salad.prototype.calculateCalorie = function () {
 
 function Order() {
     this.orderContent = [];
+    this.isPaid = false;
 }
 
-Order.prototype.isPaid = false;
+Order.prototype.pay = function () {
+    this.isPaid = true;
+};
 
 Order.prototype.addToOrder = function (item) {
     // TODO: add isPaid check
