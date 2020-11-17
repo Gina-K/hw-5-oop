@@ -63,6 +63,7 @@ function Hamburger(burgerBig, burgerSmall, stuffingCheese, stuffingLettuce, stuf
 }
 
 Hamburger.prototype = new Dish();
+Hamburger.prototype.constructor = Hamburger;
 
 Hamburger.prototype.getName = function () {
     return ((this.custom.burgerBig ? "Big" : "Small") + " hamburger" + (this.custom.stuffingCheese ? " with cheese" : "")
@@ -74,6 +75,7 @@ function Beverage(cola, coffee) {
 }
 
 Beverage.prototype = new Dish();
+Beverage.prototype.constructor = Beverage;
 
 Beverage.prototype.getName = function () {
     return (this.custom.cola ? "Cola" : "Coffee");
@@ -85,6 +87,7 @@ function Salad(caesar, olivier, weight) {
 }
 
 Salad.prototype = new Dish();
+Salad.prototype.constructor = Salad;
 
 Salad.prototype.getName = function () {
     return (this.custom.caesar ? "Caesar salad" : "Olivier salad");
